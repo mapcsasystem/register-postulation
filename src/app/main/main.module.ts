@@ -4,11 +4,16 @@ import { CommonModule } from '@angular/common';
 import { MainRoutingModule } from './main-routing.module';
 import { MaterialModule } from '../material/material.module';
 
-import { MainComponent } from './main/main.component';
+import { MainComponent } from './main.component';
+import { PostulationComponent } from './pages/postulation/postulation.component';
+import { RegisterComponent } from './pages/register/register.component';
+
 
 @NgModule({
   declarations: [
-    MainComponent
+    MainComponent,
+    PostulationComponent,
+    RegisterComponent
   ],
   exports:[
     MainComponent
@@ -16,7 +21,7 @@ import { MainComponent } from './main/main.component';
   imports: [
     CommonModule,
     MainRoutingModule,
-    MaterialModule
+    MaterialModule,
   ]
 })
 export class MainModule { }
