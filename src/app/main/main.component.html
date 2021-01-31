@@ -1,26 +1,29 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
+<mat-sidenav-container fullscreen>
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === !false"
+    class="size-sidenav color-sidenav-container">
+    <mat-toolbar>
+      <span class="text-menu-title">Menú</span>
+    </mat-toolbar>
+    <button mat-raised-button class="color-button">Iniciar con Google</button>
+    <mat-divider class="material-divider"></mat-divider>
     <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a routerLink="register" mat-list-item (click)="drawer.toggle()">
+        <mat-icon mat-list-icon class="color-size-icon">assignment</mat-icon>
+        <span class="title-list">Registro</span>
+      </a>
+      <a routerLink="postulation" mat-list-item (click)="drawer.toggle()">
+        <mat-icon mat-list-icon class="color-size-icon">fact_check</mat-icon>
+        <span class="title-list">Postulantes</span>
+      </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        >
-        <mat-icon>menu</mat-icon>
+    <mat-toolbar class="color-toolbar">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon class="color-icon-toolbar">menu</mat-icon>
       </button>
     </mat-toolbar>
-    <!-- Add Content Here -->
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

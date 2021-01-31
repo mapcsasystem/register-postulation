@@ -1,21 +1,64 @@
-.grid-container {
-  margin: 20px;
+// div{
+//   border: 1px solid black;
+// }
+.grid-container-data {
+  margin-left: 41px;
+  height: 331px;
+  display: grid;
+  grid-template-columns: 392px 84px 380px 47px 357px;
+  // grid-template-rows: 50% 50%;
 }
 
-.dashboard-card {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
+.grid-container-form-data {
+  // margin-left: 42px;
 }
 
-.more-button {
-  position: absolute;
-  top: 5px;
-  right: 10px;
+.grid-container-description-data{
+  // margin-left: 84px;
 }
 
-.dashboard-card-content {
-  text-align: center;
+.grid-container-image-data{
+  // margin-left: 47px;
 }
+
+
+
+
+.grid-container-education {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  // grid-template-rows: 50% 50%;
+}
+.grid-container-languages {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.size-line {
+  width: 93%;
+  text-align: left;
+  margin-left: 41px;
+  margin-bottom: 34px;
+}
+
+// .pesonal-data-card {
+//   position: absolute;
+//   top: 0px;
+//   left: 0px;
+//   right: 0px;
+//   bottom: 15px;
+// }
+
+// .personal-data-card-content {
+//   text-align: center;
+// }
+
+// mat-grid-tile {
+//   background: lightblue;
+// }
+
+// .more-button {
+//   position: absolute;
+//   top: 5px;
+//   right: 10px;
+// }

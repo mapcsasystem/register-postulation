@@ -1,24 +1,50 @@
-<div class="grid-container">
-  <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="2" rowHeight="350px">
-    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            {{card.title}}
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
+<div class="title-page-register">
+  Datos Personales
+</div>
+<hr class="size-line">
+
+<div class="grid-container-data">
+
+  <div class="grid-container-form-data">
+    Form
+  </div>
+  <span></span>
+  <div class="grid-container-description-data">
+    description
+  </div>
+  <span></span>
+  <div class="grid-container-image-data">
+    Imagen
+  </div>
+</div>
+<!-- 
+<div class="title-page-register">
+  Educacion
+</div>
+<hr style="width:97%;text-align:left;margin-left:10px"> 
+
+<div class="title-page-register">
+  Lenguajes
+</div>
+<hr style="width:97%;text-align:left;margin-left:10px">  -->
+
+<!-- 
+<div class="grid-container-education">
+  <div class=""></div>
+  <div class=""></div>
+</div>
+
+<div class="grid-container-languages">
+  <div class=""></div>
+  <div class=""></div>
+</div> -->
+
+
+
+<!-- <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+             <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu" xPosition="before">
               <button mat-menu-item>Expand</button>
               <button mat-menu-item>Remove</button>
-            </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div>Card Content Here</div>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
-</div>
+            </mat-menu> -->
