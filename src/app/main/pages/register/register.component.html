@@ -2,49 +2,74 @@
   Datos Personales
 </div>
 <hr class="size-line">
-<div class="grid-container-data">
-  <form class="grid-container-form-data">
-    <div class="grid-input">
+<form autocomplete="off" class="grid-container-data" [formGroup]="formPersonalData">
+  <div class="grid-container-form-data">
+    <div class="grid-input" [ngClass]="{'form-validator':formPersonalData.controls.name.errors}">
       <span></span>
-      <input type="text" placeholder="Nombres">
-      <span></span>
-    </div>
-    <span></span>
-    <div class="grid-input">
-      <span></span>
-      <input type="text" placeholder="Apellidos">
+      <input type="text" placeholder="Nombres" formControlName="name">
       <span></span>
     </div>
-    <span></span>
+    <span>
+      <span *ngIf="formPersonalData.controls.name.errors" class="input-validator-span">
+        Text with a badge
+      </span>
+    </span>
     <div class="grid-input">
       <span></span>
-      <input type="text" placeholder="DNI (numerico)">
+      <input type="text" placeholder="Apellidos" formControlName="lastName">
       <span></span>
     </div>
-    <span></span>
+    <span>
+      <span *ngIf="formPersonalData.controls.lastName.errors" class="input-validator-span">
+        Text with a badge
+      </span>
+    </span>
     <div class="grid-input">
       <span></span>
-      <input type="text" placeholder="Dirección">
+      <input type="text" placeholder="DNI (numerico)" formControlName="dni">
       <span></span>
     </div>
-    <span></span>
+    <span>
+      <span *ngIf="formPersonalData.controls.dni.errors" class="input-validator-span">
+        Text with a badge
+      </span>
+    </span>
     <div class="grid-input">
       <span></span>
-      <input type="text" placeholder="Correo (email)">
+      <input type="text" placeholder="Dirección" formControlName="address">
       <span></span>
     </div>
-    <span></span>
+    <span>
+      <span *ngIf="formPersonalData.controls.address.errors" class="input-validator-span">
+        Text with a badge
+      </span>
+    </span>
     <div class="grid-input">
       <span></span>
-      <input type="text" placeholder="Celular (teléfono)">
+      <input type="text" placeholder="Correo (email)" formControlName="email">
       <span></span>
     </div>
-    <span></span>
-  </form>
+    <span>
+      <span *ngIf="formPersonalData.controls.email.errors" class="input-validator-span">
+        Text with a badge
+      </span>
+    </span>
+    <div class="grid-input">
+      <span></span>
+      <input type="text" placeholder="Celular (teléfono)" formControlName="phone">
+      <span></span>
+    </div>
+    <span>
+      <span *ngIf="formPersonalData.controls.phone.errors" class="input-validator-span">
+        Text with a badge
+      </span>
+    </span>
+  </div>
   <span></span>
-  <div class="grid-container-description-data">
+  <div class="grid-container-description-data"
+    [ngClass]="{'form-validator':formPersonalData.controls.description.errors}">
     <span></span>
-    <textarea placeholder="Descripción personal" style="resize: none;"></textarea>
+    <textarea placeholder="Descripción personal" style="resize: none;" formControlName="description"></textarea>
     <span></span>
   </div>
   <span></span>
@@ -53,13 +78,24 @@
       <img src="../../../../assets/img/svg/google_icon.svg" alt="">
     </div>
   </div>
+</form>
+
+
+<div>
+  <app-form-education *ngIf="formPersonalData.valid" (newEducation)="addEducation($event)"
+    (validFormValueEducation)="onChangesEducationForm($event)" [educationData]="educationDataMain">
+  </app-form-education>
 </div>
 
-<app-form-education></app-form-education>
-<app-form-languages></app-form-languages>
+<div style="margin-top: 100px;">
+  <app-form-languages *ngIf="(educationDataMain.length>0) && formPersonalData.valid"
+    (newLanguages)="addlanguages($event)" (validFormValueLanguages)="onChangesLanguagesForm($event)"
+    [languagesData]="languagesDataMain"></app-form-languages>
+</div>
 
 <div class="button-save">
-  <button type="button" mat-button class="button-color-save">
+  <button type="button" mat-button class="button-color-save"
+    [disabled]="(educationDataMain.length===0) || (languagesDataMain.length===0) || formPersonalData.invalid">
     Guardar
   </button>
 </div>

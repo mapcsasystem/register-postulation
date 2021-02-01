@@ -10,6 +10,8 @@ import { FormEducationComponent } from './components/form-education/form-educati
 import { FormLanguagesComponent } from './components/form-languages/form-languages.component';
 import { PostulationComponent } from './pages/postulation/postulation.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { PipesModule } from '../shared/pipes/pipes.module';
+
 
 
 @NgModule({
@@ -28,6 +30,7 @@ import { RegisterComponent } from './pages/register/register.component';
     MainRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
+    PipesModule
   ]
 })
 export class MainModule { }

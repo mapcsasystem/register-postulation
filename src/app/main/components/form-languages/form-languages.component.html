@@ -1,57 +1,57 @@
+<div class="title-page">
+  Lenguajes de programación
+</div>
+<hr class="size-line">
 
+<div class="grid-container-education">
 
-<div class="title-page education">
-    Lenguajes de Programación
-  </div>
-  <hr class="size-line">
-  
-  
-  <div class="grid-container-education">
-  
-    <form class="grid-container-form-education">
-      <div class="grid-input">
-        <span></span>
-        <input type="text" placeholder="Lugar de educación">
-        <span></span>
-      </div>
+  <form class="grid-container-form-education" [formGroup]="formLanguagesData" (ngSubmit)="addLanguages()">
+    <div class="grid-input">
       <span></span>
-      <div class="grid-input">
-        <span></span>
-        <input type="text" placeholder="Nivel logrado">
-        <span></span>
-      </div>
+      <input type="text" placeholder="Lenguaje" formControlName="languages">
       <span></span>
-      <div class="grid-input">
-        <span></span>
-        <input type="text" placeholder="Tiempo">
-        <span></span>
-      </div>
-      <span></span>
-      <button type="submit" mat-raised-button class="button-add">Agregar</button>
-    </form>
-    <span></span>
-    <div class="table-container">
-      <table>
-        <tr>
-          <th>Lugar de educación</th>
-          <th>Nivel</th>
-          <th>Tiempo</th>
-          <th>Acciones</th>
-        </tr>
-        <tr *ngFor="let item of [1,1,1,1,1,1,1,1]">
-          <td>Alfreds Futterkiste</td>
-          <td>Maria Anders</td>
-          <td>Germany</td>
-          <td>
-            <button type="button" mat-icon-button [matMenuTriggerFor]="afterMenu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #afterMenu="matMenu" xPosition="after" class="customize">
-              <button mat-menu-item>Editar</button>
-              <button mat-menu-item>Borrar</button>
-            </mat-menu>
-          </td>
-        </tr>
-      </table>
     </div>
+    <span></span>
+    <div class="grid-input">
+      <span></span>
+      <input type="text" placeholder="Nivel logrado" formControlName="levelArchived">
+      <span></span>
+    </div>
+    <span></span>
+    <div class="grid-input">
+      <span></span>
+      <input type="text" placeholder="Tiempo de experiencia con el lenguaje" formControlName="timeExperiences">
+      <span></span>
+    </div>
+    <span></span>
+      <button type="submit" mat-raised-button class="button-add">{{ titleButton }}</button>
+  </form>
+
+  <span></span>
+
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Lenguaje</th>
+        <th>Nivel</th>
+        <th>Tiempo</th>
+        <th>Acciones</th>
+      </tr>
+      <tr *ngFor="let item of languagesData;let i=index">
+        <td>{{ item.languages }}</td>
+        <td>{{ item.levelArchived }}</td>
+        <td>{{ item.timeExperiences | addYear }}</td>
+        <td>
+          <button type="button" mat-icon-button [matMenuTriggerFor]="afterMenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #afterMenu="matMenu" xPosition="after" class="customize">
+            <button mat-menu-item (click)="setValuesControl(i)">Editar</button>
+            <button mat-menu-item (click)="deleteLanguages(i)">Borrar</button>
+          </mat-menu>
+        </td>
+      </tr>
+
+    </table>
   </div>
+</div>

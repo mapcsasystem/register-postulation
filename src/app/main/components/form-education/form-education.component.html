@@ -5,26 +5,26 @@
 
 <div class="grid-container-education">
 
-  <form class="grid-container-form-education">
+  <form class="grid-container-form-education" [formGroup]="formEducationData" (ngSubmit)="addEducation()">
     <div class="grid-input">
       <span></span>
-      <input type="text" placeholder="Lugar de educación">
+      <input type="text" placeholder="Lugar de educación" formControlName="placeEducation">
       <span></span>
     </div>
     <span></span>
     <div class="grid-input">
       <span></span>
-      <input type="text" placeholder="Nivel logrado">
+      <input type="text" placeholder="Nivel logrado" formControlName="levelArchived">
       <span></span>
     </div>
     <span></span>
     <div class="grid-input">
       <span></span>
-      <input type="text" placeholder="Tiempo">
+      <input type="text" placeholder="Tiempo" formControlName="timeEducation">
       <span></span>
     </div>
     <span></span>
-    <button type="submit" mat-raised-button class="button-add">Agregar</button>
+      <button type="submit" mat-raised-button class="button-add">{{ titleButton }}</button>
   </form>
 
   <span></span>
@@ -37,17 +37,17 @@
         <th>Tiempo</th>
         <th>Acciones</th>
       </tr>
-      <tr *ngFor="let item of [1,1,1,1,1,1,1,1]">
-        <td>Alfreds Futterkiste</td>
-        <td>Maria Anders</td>
-        <td>Germany</td>
+      <tr *ngFor="let item of educationData;let i=index">
+        <td>{{ item.placeEducation }}</td>
+        <td>{{ item.levelArchived }}</td>
+        <td>{{ item.timeEducation | addYear }}</td>
         <td>
           <button type="button" mat-icon-button [matMenuTriggerFor]="afterMenu">
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #afterMenu="matMenu" xPosition="after" class="customize">
-            <button mat-menu-item>Editar</button>
-            <button mat-menu-item>Borrar</button>
+            <button mat-menu-item (click)="setValuesControl(i)">Editar</button>
+            <button mat-menu-item (click)="deleteEducation(i)">Borrar</button>
           </mat-menu>
         </td>
       </tr>
