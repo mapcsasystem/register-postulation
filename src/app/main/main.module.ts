@@ -6,14 +6,13 @@ import { MaterialModule } from '../material/material.module';
 
 import { PostulationComponent } from './pages/postulation/postulation.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { TableComponent } from './components/table/table.component';
-
 
 
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { FormComponent } from './components/form/form.component';
 import { MainComponent } from './main.component';
+import { FormEducationComponent } from './components/form-education/form-education.component';
+import { FormLanguagesComponent } from './components/form-languages/form-languages.component';
 
 
 @NgModule({
@@ -21,8 +20,8 @@ import { MainComponent } from './main.component';
     MainComponent,
     PostulationComponent,
     RegisterComponent,
-    TableComponent,
-    FormComponent
+    FormEducationComponent,
+    FormLanguagesComponent,
   ],
   exports: [
     MainComponent
