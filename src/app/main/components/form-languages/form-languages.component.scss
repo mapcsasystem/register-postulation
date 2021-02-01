@@ -1,0 +1,68 @@
+$base-font: "Poppins", sans-serif;
+
+.grid-container-education {
+    margin-left: 41px;
+    height: 127px;
+    display: grid;
+    grid-template-columns: 392px 70px 798px;
+}
+
+.grid-container-form-education {
+    height: 203px;
+    display: grid;
+    grid-template-rows: 37px 15px 37px 15px 37px 25px 37px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    color: #4f4f4f;
+}
+
+th {
+    text-align: left;
+    padding-left: 14px;
+    border: 0px 0px;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 8px;
+}
+
+td {
+    text-align: left;
+    padding-left: 14px;
+    padding-top: 1px;
+}
+
+::ng-deep .customize {
+    background: #f2f2f2;
+    border: 1px solid #bdbdbd;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+.button-add {
+    display: block;
+    font-family: $base-font;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    color: white;
+    width: 123px;
+    height: 37px;
+    margin-left: 270px;
+    background-color: #2f80ed;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+.table-container {
+    margin-top: -15px;
+    max-height: 250px;
+    overflow: auto;
+  }
