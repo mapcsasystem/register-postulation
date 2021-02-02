@@ -46,6 +46,6 @@ testem.log
 Thumbs.db
 
 # firebase environments
-
+src/environments
 src/environments/environment.prod.ts
 src/environments/environment.ts
