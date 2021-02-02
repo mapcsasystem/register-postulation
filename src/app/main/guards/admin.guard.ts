@@ -18,7 +18,7 @@ export class AdminGuard implements CanActivate {
         map((user) => user === null ? false : true),
         tap(hasUser => {
           if (!hasUser) {
-            this.router.navigate(['/main']);
+            this.router.navigate(['']);
           }
         })
       );

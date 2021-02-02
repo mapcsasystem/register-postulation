@@ -7,7 +7,6 @@
     </mat-toolbar>
     <button *ngIf="!(currentUser$ | async)" mat-raised-button class="color-button" (click)="login()">
       Iniciar con google
-      <!-- {{ (currentUser$ | async)===null ? 'Iniciar con google':'Cerrar Sesión ' }} -->
     </button>
     <button *ngIf="(currentUser$ | async)" mat-raised-button class="color-button" (click)="logout()">
       Cerrar Sesión
