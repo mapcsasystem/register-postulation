@@ -61,7 +61,6 @@ export class FormEducationComponent implements OnInit {
     this.educationData[index] = this.formEducationData.value;
   }
 
- 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -71,7 +70,6 @@ export class FormEducationComponent implements OnInit {
   private onChangesData(): void {
     this.formEducationData.valueChanges.subscribe(() => {
       this.validFormValueEducation.emit(this.formEducationData.invalid);
-      // console.log(this.formEducationData.invalid)
     });
   }
 
