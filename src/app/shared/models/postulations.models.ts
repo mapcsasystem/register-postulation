@@ -1,7 +1,7 @@
 import { EducationModel } from './education.model';
 import { LanguagesModel } from './languages.model';
 
-export interface Postulation {
+export interface PostulationModel {
     name: string;
     lastName: string;
     dni: string;
@@ -11,6 +11,7 @@ export interface Postulation {
     description: string;
     img: string;
     pais: string;
-    education: EducationModel[];
+    educations: EducationModel[];
     languages: LanguagesModel[];
+    createdAt: string;
 }

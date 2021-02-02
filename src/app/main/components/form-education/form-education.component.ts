@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EducationModel } from 'src/app/shared/models/education.model';
 
 @Component({
@@ -18,15 +18,17 @@ export class FormEducationComponent implements OnInit {
   titleButton = 'Agregar';
 
   formEducationData: FormGroup = this.fb.group({
-    placeEducation: ['', Validators.required],
-    levelArchived: ['', Validators.required],
-    timeEducation: [null, Validators.required]
+    placeEducation: ['', [Validators.required]],
+    levelArchived: ['', [Validators.required]],
+    timeEducation: ['', [Validators.required, Validators.minLength(2)]]
   });
 
   indexValue: number;
 
   addEducation(): void {
     if (this.formEducationData.invalid) {
+      this.formEducationData.markAllAsTouched();
+      this.validFormValueEducation.emit(this.formEducationData.invalid);
       return;
     }
 
@@ -41,6 +43,7 @@ export class FormEducationComponent implements OnInit {
     this.titleButton = 'Agregar';
     this.newEducation.emit(this.educationData);
     this.formEducationData.reset();
+    this.validFormValueEducation.emit(false);
   }
 
   deleteEducation(index: number): void {
@@ -58,16 +61,28 @@ export class FormEducationComponent implements OnInit {
     this.educationData[index] = this.formEducationData.value;
   }
 
-  private onChanges(): void {
-    this.formEducationData.valueChanges.subscribe(() => {
-      this.validFormValueEducation.emit(this.formEducationData.invalid);
-    });
-  }
-
+ 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.onChanges();
+    this.onChangesData();
   }
 
+  private onChangesData(): void {
+    this.formEducationData.valueChanges.subscribe(() => {
+      this.validFormValueEducation.emit(this.formEducationData.invalid);
+      // console.log(this.formEducationData.invalid)
+    });
+  }
+
+
+  get placeEducation(): AbstractControl {
+    return this.formEducationData.get('placeEducation');
+  }
+  get levelArchived(): AbstractControl {
+    return this.formEducationData.get('levelArchived');
+  }
+  get timeEducation(): AbstractControl {
+    return this.formEducationData.get('timeEducation');
+  }
 }

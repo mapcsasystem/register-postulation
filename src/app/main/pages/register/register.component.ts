@@ -7,6 +7,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { RegExpValidation } from 'src/app/shared/regex/regex';
 import { EducationModel } from 'src/app/shared/models/education.model';
 import { LanguagesModel } from 'src/app/shared/models/languages.model';
+import { PostulationsService } from '../../services/postulation/postulations.service';
 
 @Component({
   selector: 'app-register',
@@ -21,17 +22,18 @@ export class RegisterComponent {
   downloadURL$: Observable<string>;
 
   formPersonalData: FormGroup = this.fb.group({
-    name: ['', Validators.required],
-    lastName: ['', Validators.required],
-    dni: ['', [Validators.required, Validators.minLength(8)]],
-    address: ['', Validators.required],
-    email: ['', [Validators.required, Validators.pattern(RegExpValidation.email)]],
-    phone: ['', [Validators.required, Validators.minLength(12)]],
-    description: ['', Validators.required],
-    img: ['', [Validators.required]],
+    name: ['mmmm', Validators.required],
+    lastName: ['mmmm', Validators.required],
+    dni: ['11111111', [Validators.required, Validators.minLength(8)]],
+    address: ['sdfds. perro', Validators.required],
+    email: ['mapcsasystem@gmail.com', [Validators.required, Validators.pattern(RegExpValidation.email)]],
+    phone: ['111111111111', [Validators.required, Validators.minLength(12)]],
+    description: ['fdgdfgdfgfd', Validators.required],
+    img: ['324234', [Validators.required]],
     pais: [''],
-    education: this.fb.array([]),
-    languages: this.fb.array([])
+    educations: this.fb.array([]),
+    languages: this.fb.array([]),
+    createdAt: ['']
   });
 
 
@@ -42,17 +44,18 @@ export class RegisterComponent {
   validationFormLanguages = true;
 
 
-  addEducation(value: EducationModel[]): void {
+  addEducationChange(value: EducationModel[]): void {
     this.educationDataMain = value;
+  }
+
+  addlanguagesChange(value: LanguagesModel[]): void {
+    this.languagesDataMain = value;
   }
 
   onChangesEducationForm(value: boolean): void {
     this.validationFormEducation = value;
   }
 
-  addlanguages(value: LanguagesModel[]): void {
-    this.languagesDataMain = value;
-  }
 
   onChangesLanguagesForm(value: boolean): void {
     this.validationFormLanguages = value;
@@ -94,7 +97,13 @@ export class RegisterComponent {
       .subscribe();
   }
 
-  constructor(private fb: FormBuilder, private storage: AngularFireStorage) { }
+  constructor(
+    private fb: FormBuilder,
+    private storage: AngularFireStorage,
+    private postulationsService: PostulationsService
+  ) {
+    // postulationsService.createPostulation(this.formPersonalData.value);
+  }
 
 
   get name(): AbstractControl {
@@ -106,21 +115,18 @@ export class RegisterComponent {
   get dni(): AbstractControl {
     return this.formPersonalData.get('dni');
   }
-
   get address(): AbstractControl {
     return this.formPersonalData.get('address');
   }
   get email(): AbstractControl {
     return this.formPersonalData.get('email');
   }
-
   get phone(): AbstractControl {
     return this.formPersonalData.get('phone');
   }
   get description(): AbstractControl {
     return this.formPersonalData.get('description');
   }
-
   get img(): AbstractControl {
     return this.formPersonalData.get('img');
   }
