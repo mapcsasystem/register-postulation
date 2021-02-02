@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { EducationInterface } from 'src/app/shared/interfaces/education.interface';
-import { LanguagesInterface } from 'src/app/shared/interfaces/languages.interface';
+
 import { AngularFireStorage } from '@angular/fire/storage';
 import { RegExpValidation } from 'src/app/shared/regex/regex';
+import { EducationModel } from 'src/app/shared/models/education.model';
+import { LanguagesModel } from 'src/app/shared/models/languages.model';
 
 @Component({
   selector: 'app-register',
@@ -15,8 +16,6 @@ import { RegExpValidation } from 'src/app/shared/regex/regex';
 export class RegisterComponent {
 
   image: string = null;
-
-  public customPatterns = { 0: { pattern: new RegExp('\[a-zA-Z\]') } };
 
   uploadPercent$: Observable<number>;
   downloadURL$: Observable<string>;
@@ -30,18 +29,20 @@ export class RegisterComponent {
     phone: ['', [Validators.required, Validators.minLength(12)]],
     description: ['', Validators.required],
     img: ['', [Validators.required]],
+    pais: [''],
+    education: this.fb.array([]),
+    languages: this.fb.array([])
   });
 
-  // image$: Observable<string>;
 
-  educationDataMain: EducationInterface[] = [];
+  educationDataMain: EducationModel[] = [];
   validationFormEducation = true;
 
-  languagesDataMain: LanguagesInterface[] = [];
+  languagesDataMain: LanguagesModel[] = [];
   validationFormLanguages = true;
 
 
-  addEducation(value: EducationInterface[]): void {
+  addEducation(value: EducationModel[]): void {
     this.educationDataMain = value;
   }
 
@@ -49,7 +50,7 @@ export class RegisterComponent {
     this.validationFormEducation = value;
   }
 
-  addlanguages(value: LanguagesInterface[]): void {
+  addlanguages(value: LanguagesModel[]): void {
     this.languagesDataMain = value;
   }
 
@@ -64,10 +65,16 @@ export class RegisterComponent {
       this.formPersonalData.markAsTouched();
       return;
     }
+
+    const getStringForArray = this._removeValueLastWords(this.formPersonalData.get('address').value);
+    this.formPersonalData.get('country').setValue(getStringForArray);
+    this.formPersonalData.get('education').setValue(this.educationDataMain);
+    this.formPersonalData.get('languages').setValue(this.languagesDataMain);
+
+
   }
 
-  // tslint:disable-next-line: typedef
-  uploadFile(event) {
+  uploadFile(event): void {
     if (this.image === null) {
       this.image = new Date().toISOString();
     }
@@ -116,6 +123,12 @@ export class RegisterComponent {
 
   get img(): AbstractControl {
     return this.formPersonalData.get('img');
+  }
+
+  private _removeValueLastWords(value: string): string {
+    let arr: string[] = value.split(' ');
+    arr = arr.filter(e => e !== '');
+    return arr[arr.length - 1];
   }
 
 }

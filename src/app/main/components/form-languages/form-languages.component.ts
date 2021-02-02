@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LanguagesInterface } from 'src/app/shared/interfaces/languages.interface';
+
+import { LanguagesModel } from 'src/app/shared/models/languages.model';
 
 @Component({
   selector: 'app-form-languages',
@@ -9,9 +10,9 @@ import { LanguagesInterface } from 'src/app/shared/interfaces/languages.interfac
 })
 export class FormLanguagesComponent implements OnInit {
 
-  @Input() languagesData: LanguagesInterface[] = [];
+  @Input() languagesData: LanguagesModel[] = [];
 
-  @Output() newLanguages: EventEmitter<LanguagesInterface[]> = new EventEmitter();
+  @Output() newLanguages: EventEmitter<LanguagesModel[]> = new EventEmitter();
   @Output() validFormValueLanguages: EventEmitter<boolean> = new EventEmitter();
 
   titleButton = 'Agregar';

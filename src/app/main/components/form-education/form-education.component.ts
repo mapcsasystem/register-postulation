@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EducationInterface } from 'src/app/shared/interfaces/education.interface';
+import { EducationModel } from 'src/app/shared/models/education.model';
 
 @Component({
   selector: 'app-form-education',
@@ -9,9 +9,9 @@ import { EducationInterface } from 'src/app/shared/interfaces/education.interfac
 })
 export class FormEducationComponent implements OnInit {
 
-  @Input() educationData: EducationInterface[] = [];
+  @Input() educationData: EducationModel[] = [];
 
-  @Output() newEducation: EventEmitter<EducationInterface[]> = new EventEmitter();
+  @Output() newEducation: EventEmitter<EducationModel[]> = new EventEmitter();
   @Output() validFormValueEducation: EventEmitter<boolean> = new EventEmitter();
 
   // educationData: EducationInterface[] = [];

@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
-import { AngularFireAuth } from '@angular/fire/auth';
-import firebase from 'firebase/app';
-
-import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
+
+import { AuthService } from './services/auth/auth.service';
 
 @Component({
   selector: 'app-main',

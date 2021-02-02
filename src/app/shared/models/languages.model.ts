@@ -1,4 +1,4 @@
-export interface LanguagesInterface {
+export interface LanguagesModel {
     languages: string;
     levelArchived: string;
     timeExperiences: number;
