@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "register-postulation-7a859": {
+      "hosting": {
+        "register-postulation": [
+          "register-postulation-7a859"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "register-postulation-7a859"
+  }
+}

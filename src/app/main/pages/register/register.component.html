@@ -3,86 +3,119 @@
 </div>
 <hr class="size-line">
 <form autocomplete="off" class="grid-container-data" [formGroup]="formPersonalData">
+
   <div class="grid-container-form-data">
+
+    <!-- Name -->
     <div class="grid-input" [ngClass]="{'form-validator':name.errors?.required  && ( name.dirty || name.touched)}">
       <span></span>
       <input type="text" placeholder="Nombres" formControlName="name">
       <span></span>
     </div>
     <span>
-      <span *ngIf="name.errors?.required  && ( name.dirty || name.touched)"  class="input-validator-span">
+      <span *ngIf="name.errors?.required  && ( name.dirty || name.touched)" class="input-validator-span">
         El campo es requerido
       </span>
     </span>
-    <div class="grid-input" [ngClass]="{'form-validator':lastName.errors?.required  && ( lastName.dirty || lastName.touched)}">
+
+    <!-- lastName -->
+    <div class="grid-input"
+      [ngClass]="{'form-validator':lastName.errors?.required  && ( lastName.dirty || lastName.touched)}">
       <span></span>
       <input type="text" placeholder="Apellidos" formControlName="lastName">
       <span></span>
     </div>
     <span>
-      <span *ngIf="lastName.errors?.required  && ( lastName.dirty || lastName.touched)"  class="input-validator-span">
+      <span *ngIf="lastName.errors?.required  && ( lastName.dirty || lastName.touched)" class="input-validator-span">
         El campo es requerido
       </span>
     </span>
-    <div class="grid-input" [ngClass]="{'form-validator':lastName.errors?.required  && ( lastName.dirty || lastName.touched)}">
+
+    <!-- dni -->
+    <div class="grid-input"
+      [ngClass]="{'form-validator':dni.errors?.required  && ( dni.dirty || dni.touched )|| dni.errors?.minlength}">
       <span></span>
-      <input type="text" placeholder="DNI (numerico)" formControlName="dni">
+      <input type="text" mask="00000000" placeholder="DNI (numerico)" formControlName="dni">
       <span></span>
     </div>
     <span>
-      <span *ngIf="dni.errors?.required  && ( dni.dirty || dni.touched)"  class="input-validator-span">
-        El campo es requerido
+      <span *ngIf="dni.errors?.required  && ( dni.dirty || dni.touched)" class="input-validator-span">
+        Campo requerido.
+      </span>
+      <span *ngIf="dni.errors?.minlength" class="input-validator-span">
+        Formato numerico ej. 55555555
       </span>
     </span>
-    <div class="grid-input" [ngClass]="{'form-validator':address.errors?.required  && ( address.dirty || address.touched)}">
+
+    <!-- address -->
+    <div class="grid-input"
+      [ngClass]="{'form-validator':address.errors?.required  && ( address.dirty || address.touched)}">
       <span></span>
       <input type="text" placeholder="Dirección" formControlName="address">
       <span></span>
     </div>
     <span>
-      <span *ngIf="address.errors?.required  && ( address.dirty || address.touched)"  class="input-validator-span">
+      <span *ngIf="address.errors?.required  && ( address.dirty || address.touched)" class="input-validator-span">
         El campo es requerido
       </span>
     </span>
-    <div class="grid-input" [ngClass]="{'form-validator':email.errors?.required  && ( email.dirty || email.touched)}">
+
+    <!-- email -->
+    <div class="grid-input"
+      [ngClass]="{'form-validator':email.errors?.required  && ( email.dirty || email.touched ) || email.errors?.pattern}">
       <span></span>
-      <input type="text" placeholder="Correo (email)" formControlName="email">
+      <input type="email" placeholder="Correo (email)" formControlName="email">
       <span></span>
     </div>
     <span>
-      <span *ngIf="email.errors?.required  && ( email.dirty || email.touched)"  class="input-validator-span">
+      <span *ngIf="email.errors?.required  && ( email.dirty || email.touched)" class="input-validator-span">
         El campo es requerido
       </span>
+      <span *ngIf="email.errors?.pattern" class="input-validator-span">
+        Formato de correo invalido ej. ejemplo@ejemplo.com
+      </span>
     </span>
-    <div class="grid-input"  [ngClass]="{'form-validator':phone.errors?.required  && ( phone.dirty || phone.touched)}">
+
+    <!-- phone -->
+    <div class="grid-input"
+      [ngClass]="{'form-validator':phone.errors?.required  && ( phone.dirty || phone.touched )|| phone.errors?.minlength}">
       <span></span>
-      <input type="text" placeholder="Celular (teléfono)" formControlName="phone">
+      <input type="text" mask="+00 (000) 000-0000" placeholder="Celular (teléfono)" formControlName="phone">
       <span></span>
     </div>
     <span>
-      <span *ngIf="phone.errors?.required  && ( phone.dirty || phone.touched)"  class="input-validator-span">
-        El campo es requerido
+      <span *ngIf="phone.errors?.required  && ( phone.dirty || phone.touched)"
+        class="input-validator-span">
+        Error formato el formato requerido debe ser ej. +01 (000) 000-0000
+      </span>
+      <span *ngIf="phone.errors?.minlength" class="input-validator-span">
+        Formato numerico ej. 55555555
       </span>
     </span>
   </div>
+
+  <!-- description -->
   <span></span>
-  <div class="grid-container-description-data" [ngClass]="{'validator-txtarea':description.errors?.required  && ( description.dirty || description.touched)}">
+  <div class="grid-container-description-data"
+    [ngClass]="{'validator-txtarea':description.errors?.required  && ( description.dirty || description.touched)}">
     <span></span>
     <textarea placeholder="Descripción personal" style="resize: none;" formControlName="description"></textarea>
     <span></span>
   </div>
   <span>
-    <span   class="input-validator-span">
+    <span class="input-validator-span">
     </span>
   </span>
-  <div class="grid-container-image-data" [ngClass]="{'validator-img':img.errors?.required  && ( img.dirty || img.touched)}">
-    <div class="image-area">
-      <label for="file-input">
-        <img src="../../../../assets/img/svg/google_icon.svg"/>
-      </label>
-      <!-- <img src="../../../../assets/img/svg/google_icon.svg" alt="" > -->
-      <input id="file-input" type="file" style="display: none;" formControlName="img" (change)="uploadFile($event)" accept="image/x-png, image/jpg, image/jpeg"/>
 
+  <!-- img -->
+  <div class="grid-container-image-data"
+    [ngClass]="{'validator-img':phone.errors?.required  && ( img.dirty || img.touched)}">
+    <div class="image-area ">
+      <label for="file-input">
+        <img [src]="downloadURL$ | async" onError="this.src='../../../../assets/img/svg/google_icon.svg'" />
+      </label>
+      <input id="file-input" type="file" style="display: none;" (change)="uploadFile($event)"
+        accept="image/x-png, image/jpg, image/jpeg" />
     </div>
   </div>
 </form>
@@ -101,8 +134,12 @@
 </div>
 
 <div class="button-save">
-  <button type="button" mat-button class="button-color-save"
-    [disabled]="(educationDataMain.length===0) || (languagesDataMain.length===0) || formPersonalData.invalid">
+  <button type="button" mat-button class="button-color-save" (click)="saveData()">
     Guardar
   </button>
 </div>
+
+<!-- 
+<input type="file" (change)="uploadFile($event)" />
+<div>{{ uploadPercent | async }}</div>
+<a [href]="downloadURL | async">{{ downloadURL | async }}</a> -->

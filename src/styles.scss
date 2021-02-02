@@ -92,6 +92,7 @@ input {
 
 .validator-txtarea {
     border: 1px solid red !important ;
+    box-shadow: 0px 0px 5px red  !important;
     box-sizing: border-box !important;
     border-radius: 10px !important;
 }
@@ -99,6 +100,6 @@ input {
 .validator-img{
     border: 1px solid red !important ;
     box-sizing: border-box !important ;
-    box-shadow: 0px 4px 4px rgba(160, 102, 102, 0.25) !important ;
+    box-shadow: 0px 0px 5px red !important ;
     border-radius: 20px !important ;
 }
