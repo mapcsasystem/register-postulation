@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { EducationInterface } from 'src/app/shared/interfaces/education.interface';
 import { LanguagesInterface } from 'src/app/shared/interfaces/languages.interface';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { RegExpValidation } from 'src/app/shared/regex/regex';
 
 @Component({
   selector: 'app-register',
@@ -12,20 +14,25 @@ import { LanguagesInterface } from 'src/app/shared/interfaces/languages.interfac
 })
 export class RegisterComponent {
 
-  imgFlag: any;
+  image: string = null;
+
+  public customPatterns = { 0: { pattern: new RegExp('\[a-zA-Z\]') } };
+
+  uploadPercent$: Observable<number>;
+  downloadURL$: Observable<string>;
 
   formPersonalData: FormGroup = this.fb.group({
     name: ['', Validators.required],
     lastName: ['', Validators.required],
-    dni: ['', Validators.required],
+    dni: ['', [Validators.required, Validators.minLength(8)]],
     address: ['', Validators.required],
-    email: ['', Validators.required],
-    phone: ['', Validators.required],
+    email: ['', [Validators.required, Validators.pattern(RegExpValidation.email)]],
+    phone: ['', [Validators.required, Validators.minLength(12)]],
     description: ['', Validators.required],
-    img: ['', Validators.required],
+    img: ['', [Validators.required]],
   });
 
-  image$: Observable<any>;
+  // image$: Observable<string>;
 
   educationDataMain: EducationInterface[] = [];
   validationFormEducation = true;
@@ -52,35 +59,35 @@ export class RegisterComponent {
 
 
   saveData(): void {
+    this.formPersonalData.markAllAsTouched();
     if (this.formPersonalData.invalid) {
       this.formPersonalData.markAsTouched();
       return;
     }
   }
 
-  uploadFile(event): void {
-    // const file = event.target.files[0];
-    // const name = `${this.formPersonalData.controls.dni.value}`;
-    // const fileRef = this.storage.ref(name);
-    // // const dir = 'images';
-
-    // const task = this.storage.upload(dir, file);
-    // task.snapshotChanges()
-    //   .pipe(
-    //     finalize(() => {
-    //       this.image$ = fileRef.getDownloadURL();
-    //     })
-    //   )
-    //   .subscribe();
-
-    // console.log(filePath)
-    // const ref = this.storage.ref(filePath);
-    // const task = ref.putString(file);
-
-
+  // tslint:disable-next-line: typedef
+  uploadFile(event) {
+    if (this.image === null) {
+      this.image = new Date().toISOString();
+    }
+    const file = event.target.files[0];
+    const name = `images/${this.image}.png`;
+    const fileRef = this.storage.ref(name);
+    const task = this.storage.upload(name, file);
+    this.uploadPercent$ = task.percentageChanges();
+    const image1 = task.snapshotChanges().pipe(
+      finalize(() => {
+        this.downloadURL$ = fileRef.getDownloadURL();
+        this.downloadURL$.subscribe(url => {
+          this.formPersonalData.get('img').setValue(url);
+        });
+      })
+    )
+      .subscribe();
   }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private storage: AngularFireStorage) { }
 
 
   get name(): AbstractControl {

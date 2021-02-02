@@ -11,6 +11,7 @@ import { FormEducationComponent } from './components/form-education/form-educati
 import { FormLanguagesComponent } from './components/form-languages/form-languages.component';
 import { PostulationComponent } from './pages/postulation/postulation.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 
@@ -31,6 +32,7 @@ import { RegisterComponent } from './pages/register/register.component';
     MaterialModule,
     ReactiveFormsModule,
     PipesModule,
+    NgxMaskModule,
   ]
 })
 export class MainModule { }
