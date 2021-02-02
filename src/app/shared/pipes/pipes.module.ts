@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { AddYearPipe } from './addYear/add-year.pipe';
-
-
 
 @NgModule({
   declarations: [
@@ -10,9 +7,6 @@ import { AddYearPipe } from './addYear/add-year.pipe';
   ],
   exports: [
     AddYearPipe
-  ],
-  imports: [
-    CommonModule
   ]
 })
 export class PipesModule { }

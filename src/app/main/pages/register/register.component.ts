@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { EducationInterface } from 'src/app/shared/interfaces/education.interface';
 import { LanguagesInterface } from 'src/app/shared/interfaces/languages.interface';
 
@@ -10,16 +12,20 @@ import { LanguagesInterface } from 'src/app/shared/interfaces/languages.interfac
 })
 export class RegisterComponent {
 
+  imgFlag: any;
+
   formPersonalData: FormGroup = this.fb.group({
-    name: ['Nombre', Validators.required],
-    lastName: ['Apellidos', Validators.required],
-    dni: ['dni', Validators.required],
-    address: ['Direccion', Validators.required],
-    email: ['email', Validators.required],
-    phone: ['phone', Validators.required],
-    description: ['Description', Validators.required],
-    img: ['imagen', Validators.required],
+    name: ['', Validators.required],
+    lastName: ['', Validators.required],
+    dni: ['', Validators.required],
+    address: ['', Validators.required],
+    email: ['', Validators.required],
+    phone: ['', Validators.required],
+    description: ['', Validators.required],
+    img: ['', Validators.required],
   });
+
+  image$: Observable<any>;
 
   educationDataMain: EducationInterface[] = [];
   validationFormEducation = true;
@@ -44,5 +50,65 @@ export class RegisterComponent {
     this.validationFormLanguages = value;
   }
 
+
+  saveData(): void {
+    if (this.formPersonalData.invalid) {
+      this.formPersonalData.markAsTouched();
+      return;
+    }
+  }
+
+  uploadFile(event): void {
+    // const file = event.target.files[0];
+    // const name = `${this.formPersonalData.controls.dni.value}`;
+    // const fileRef = this.storage.ref(name);
+    // // const dir = 'images';
+
+    // const task = this.storage.upload(dir, file);
+    // task.snapshotChanges()
+    //   .pipe(
+    //     finalize(() => {
+    //       this.image$ = fileRef.getDownloadURL();
+    //     })
+    //   )
+    //   .subscribe();
+
+    // console.log(filePath)
+    // const ref = this.storage.ref(filePath);
+    // const task = ref.putString(file);
+
+
+  }
+
   constructor(private fb: FormBuilder) { }
+
+
+  get name(): AbstractControl {
+    return this.formPersonalData.get('name');
+  }
+  get lastName(): AbstractControl {
+    return this.formPersonalData.get('lastName');
+  }
+  get dni(): AbstractControl {
+    return this.formPersonalData.get('dni');
+  }
+
+  get address(): AbstractControl {
+    return this.formPersonalData.get('address');
+  }
+  get email(): AbstractControl {
+    return this.formPersonalData.get('email');
+  }
+
+  get phone(): AbstractControl {
+    return this.formPersonalData.get('phone');
+  }
+  get description(): AbstractControl {
+    return this.formPersonalData.get('description');
+  }
+
+  get img(): AbstractControl {
+    return this.formPersonalData.get('img');
+  }
+
 }

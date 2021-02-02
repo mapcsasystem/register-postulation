@@ -4,78 +4,85 @@
 <hr class="size-line">
 <form autocomplete="off" class="grid-container-data" [formGroup]="formPersonalData">
   <div class="grid-container-form-data">
-    <div class="grid-input" [ngClass]="{'form-validator':formPersonalData.controls.name.errors}">
+    <div class="grid-input" [ngClass]="{'form-validator':name.errors?.required  && ( name.dirty || name.touched)}">
       <span></span>
       <input type="text" placeholder="Nombres" formControlName="name">
       <span></span>
     </div>
     <span>
-      <span *ngIf="formPersonalData.controls.name.errors" class="input-validator-span">
-        Text with a badge
+      <span *ngIf="name.errors?.required  && ( name.dirty || name.touched)"  class="input-validator-span">
+        El campo es requerido
       </span>
     </span>
-    <div class="grid-input">
+    <div class="grid-input" [ngClass]="{'form-validator':lastName.errors?.required  && ( lastName.dirty || lastName.touched)}">
       <span></span>
       <input type="text" placeholder="Apellidos" formControlName="lastName">
       <span></span>
     </div>
     <span>
-      <span *ngIf="formPersonalData.controls.lastName.errors" class="input-validator-span">
-        Text with a badge
+      <span *ngIf="lastName.errors?.required  && ( lastName.dirty || lastName.touched)"  class="input-validator-span">
+        El campo es requerido
       </span>
     </span>
-    <div class="grid-input">
+    <div class="grid-input" [ngClass]="{'form-validator':lastName.errors?.required  && ( lastName.dirty || lastName.touched)}">
       <span></span>
       <input type="text" placeholder="DNI (numerico)" formControlName="dni">
       <span></span>
     </div>
     <span>
-      <span *ngIf="formPersonalData.controls.dni.errors" class="input-validator-span">
-        Text with a badge
+      <span *ngIf="dni.errors?.required  && ( dni.dirty || dni.touched)"  class="input-validator-span">
+        El campo es requerido
       </span>
     </span>
-    <div class="grid-input">
+    <div class="grid-input" [ngClass]="{'form-validator':address.errors?.required  && ( address.dirty || address.touched)}">
       <span></span>
       <input type="text" placeholder="Dirección" formControlName="address">
       <span></span>
     </div>
     <span>
-      <span *ngIf="formPersonalData.controls.address.errors" class="input-validator-span">
-        Text with a badge
+      <span *ngIf="address.errors?.required  && ( address.dirty || address.touched)"  class="input-validator-span">
+        El campo es requerido
       </span>
     </span>
-    <div class="grid-input">
+    <div class="grid-input" [ngClass]="{'form-validator':email.errors?.required  && ( email.dirty || email.touched)}">
       <span></span>
       <input type="text" placeholder="Correo (email)" formControlName="email">
       <span></span>
     </div>
     <span>
-      <span *ngIf="formPersonalData.controls.email.errors" class="input-validator-span">
-        Text with a badge
+      <span *ngIf="email.errors?.required  && ( email.dirty || email.touched)"  class="input-validator-span">
+        El campo es requerido
       </span>
     </span>
-    <div class="grid-input">
+    <div class="grid-input"  [ngClass]="{'form-validator':phone.errors?.required  && ( phone.dirty || phone.touched)}">
       <span></span>
       <input type="text" placeholder="Celular (teléfono)" formControlName="phone">
       <span></span>
     </div>
     <span>
-      <span *ngIf="formPersonalData.controls.phone.errors" class="input-validator-span">
-        Text with a badge
+      <span *ngIf="phone.errors?.required  && ( phone.dirty || phone.touched)"  class="input-validator-span">
+        El campo es requerido
       </span>
     </span>
   </div>
   <span></span>
-  <div class="grid-container-description-data"
-    [ngClass]="{'form-validator':formPersonalData.controls.description.errors}">
+  <div class="grid-container-description-data" [ngClass]="{'validator-txtarea':description.errors?.required  && ( description.dirty || description.touched)}">
     <span></span>
     <textarea placeholder="Descripción personal" style="resize: none;" formControlName="description"></textarea>
     <span></span>
   </div>
-  <span></span>
-  <div class="grid-container-image-data">
+  <span>
+    <span   class="input-validator-span">
+    </span>
+  </span>
+  <div class="grid-container-image-data" [ngClass]="{'validator-img':img.errors?.required  && ( img.dirty || img.touched)}">
     <div class="image-area">
-      <img src="../../../../assets/img/svg/google_icon.svg" alt="">
+      <label for="file-input">
+        <img src="../../../../assets/img/svg/google_icon.svg"/>
+      </label>
+      <!-- <img src="../../../../assets/img/svg/google_icon.svg" alt="" > -->
+      <input id="file-input" type="file" style="display: none;" formControlName="img" (change)="uploadFile($event)" accept="image/x-png, image/jpg, image/jpeg"/>
+
     </div>
   </div>
 </form>
