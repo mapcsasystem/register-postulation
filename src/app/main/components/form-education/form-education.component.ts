@@ -1,32 +1,34 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EducationInterface } from 'src/app/shared/interfaces/education.interface';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EducationModel } from 'src/app/shared/models/education.model';
 
 @Component({
   selector: 'app-form-education',
   templateUrl: './form-education.component.html',
   styleUrls: ['./form-education.component.scss']
 })
+
 export class FormEducationComponent implements OnInit {
 
-  @Input() educationData: EducationInterface[] = [];
+  @Input() educationData: EducationModel[] = [];
 
-  @Output() newEducation: EventEmitter<EducationInterface[]> = new EventEmitter();
+  @Output() newEducation: EventEmitter<EducationModel[]> = new EventEmitter();
   @Output() validFormValueEducation: EventEmitter<boolean> = new EventEmitter();
 
-  // educationData: EducationInterface[] = [];
   titleButton = 'Agregar';
 
   formEducationData: FormGroup = this.fb.group({
-    placeEducation: ['', Validators.required],
-    levelArchived: ['', Validators.required],
-    timeEducation: [null, Validators.required]
+    placeEducation: ['', [Validators.required]],
+    levelArchived: ['', [Validators.required]],
+    timeEducation: ['', [Validators.required, Validators.minLength(2)]]
   });
 
   indexValue: number;
 
   addEducation(): void {
     if (this.formEducationData.invalid) {
+      this.formEducationData.markAllAsTouched();
+      this.validFormValueEducation.emit(this.formEducationData.invalid);
       return;
     }
 
@@ -41,6 +43,7 @@ export class FormEducationComponent implements OnInit {
     this.titleButton = 'Agregar';
     this.newEducation.emit(this.educationData);
     this.formEducationData.reset();
+    this.validFormValueEducation.emit(false);
   }
 
   deleteEducation(index: number): void {
@@ -54,20 +57,29 @@ export class FormEducationComponent implements OnInit {
     this.formEducationData.setValue(this.educationData[index]);
   }
 
+  constructor(private fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.onChangesData();
+  }
+
   private updateEducation(index: number): void {
     this.educationData[index] = this.formEducationData.value;
   }
 
-  private onChanges(): void {
+  private onChangesData(): void {
     this.formEducationData.valueChanges.subscribe(() => {
       this.validFormValueEducation.emit(this.formEducationData.invalid);
     });
   }
 
-  constructor(private fb: FormBuilder) { }
-
-  ngOnInit(): void {
-    this.onChanges();
+  get placeEducation(): AbstractControl {
+    return this.formEducationData.get('placeEducation');
   }
-
+  get levelArchived(): AbstractControl {
+    return this.formEducationData.get('levelArchived');
+  }
+  get timeEducation(): AbstractControl {
+    return this.formEducationData.get('timeEducation');
+  }
 }

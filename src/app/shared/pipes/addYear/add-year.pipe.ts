@@ -5,8 +5,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class AddYearPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(value: string): string {
+    // tslint:disable-next-line: radix
+    const num = parseInt(value);
+    return (num > 1 ? `${num} años` : `${num} año`);
   }
 
 }

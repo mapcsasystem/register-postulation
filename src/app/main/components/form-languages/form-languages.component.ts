@@ -1,31 +1,34 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LanguagesInterface } from 'src/app/shared/interfaces/languages.interface';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LanguagesModel } from 'src/app/shared/models/languages.model';
 
 @Component({
   selector: 'app-form-languages',
   templateUrl: './form-languages.component.html',
   styleUrls: ['./form-languages.component.scss']
 })
+
 export class FormLanguagesComponent implements OnInit {
 
-  @Input() languagesData: LanguagesInterface[] = [];
+  @Input() languagesData: LanguagesModel[] = [];
 
-  @Output() newLanguages: EventEmitter<LanguagesInterface[]> = new EventEmitter();
+  @Output() newLanguages: EventEmitter<LanguagesModel[]> = new EventEmitter();
   @Output() validFormValueLanguages: EventEmitter<boolean> = new EventEmitter();
 
   titleButton = 'Agregar';
 
   formLanguagesData: FormGroup = this.fb.group({
-    languages: ['', Validators.required],
-    levelArchived: ['', Validators.required],
-    timeExperiences: [null, Validators.required]
+    languages: ['', [Validators.required]],
+    levelArchived: ['', [Validators.required]],
+    timeExperiences: ['', [Validators.required, Validators.minLength(2)]]
   });
 
   indexValue: number;
 
   addLanguages(): void {
     if (this.formLanguagesData.invalid) {
+      this.formLanguagesData.markAllAsTouched();
+      this.validFormValueLanguages.emit(this.formLanguagesData.invalid);
       return;
     }
 
@@ -40,6 +43,7 @@ export class FormLanguagesComponent implements OnInit {
     this.titleButton = 'Agregar';
     this.newLanguages.emit(this.languagesData);
     this.formLanguagesData.reset();
+    this.validFormValueLanguages.emit(false);
   }
 
   deleteLanguages(index: number): void {
@@ -53,6 +57,12 @@ export class FormLanguagesComponent implements OnInit {
     this.formLanguagesData.setValue(this.languagesData[index]);
   }
 
+  constructor(private fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.onChanges();
+  }
+
   private updateEducation(index: number): void {
     this.languagesData[index] = this.formLanguagesData.value;
   }
@@ -63,10 +73,14 @@ export class FormLanguagesComponent implements OnInit {
     });
   }
 
-  constructor(private fb: FormBuilder) { }
-
-  ngOnInit(): void {
-    this.onChanges();
+  get languages(): AbstractControl {
+    return this.formLanguagesData.get('languages');
+  }
+  get levelArchived(): AbstractControl {
+    return this.formLanguagesData.get('levelArchived');
+  }
+  get timeExperiences(): AbstractControl {
+    return this.formLanguagesData.get('timeExperiences');
   }
 
 }

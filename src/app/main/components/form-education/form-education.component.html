@@ -4,27 +4,57 @@
 <hr class="size-line">
 
 <div class="grid-container-education">
-
   <form class="grid-container-form-education" [formGroup]="formEducationData" (ngSubmit)="addEducation()">
-    <div class="grid-input">
+
+    <!-- placeEducation -->
+
+    <div class="grid-input"
+      [ngClass]="{'form-validator':placeEducation.errors?.required  && ( placeEducation.dirty || placeEducation.touched)}">
       <span></span>
       <input type="text" placeholder="Lugar de educación" formControlName="placeEducation">
       <span></span>
     </div>
-    <span></span>
-    <div class="grid-input">
+    <span>
+      <span *ngIf="placeEducation.errors?.required  && ( placeEducation.dirty || placeEducation.touched)"
+        class="input-validator-span">
+        El campo es requerido
+      </span>
+    </span>
+
+    <!-- levelArchived -->
+
+    <div class="grid-input"
+      [ngClass]="{'form-validator':levelArchived.errors?.required  && ( levelArchived.dirty || levelArchived.touched)}">
       <span></span>
       <input type="text" placeholder="Nivel logrado" formControlName="levelArchived">
       <span></span>
     </div>
-    <span></span>
-    <div class="grid-input">
+    <span>
+      <span *ngIf="levelArchived.errors?.required  && ( levelArchived.dirty || levelArchived.touched)"
+        class="input-validator-span">
+        El campo es requerido
+      </span>
+    </span>
+
+    <!-- timeEducation -->
+
+    <div class="grid-input"
+      [ngClass]="{'form-validator':timeEducation.errors?.required  && ( timeEducation.dirty || timeEducation.touched) || timeEducation.errors?.minlength}">
       <span></span>
-      <input type="text" placeholder="Tiempo" formControlName="timeEducation">
+      <input type="text" mask="00" placeholder="Tiempo" formControlName="timeEducation">
       <span></span>
     </div>
-    <span></span>
-      <button type="submit" mat-raised-button class="button-add">{{ titleButton }}</button>
+    <span>
+      <span *ngIf="timeEducation.errors?.required  && ( timeEducation.dirty || timeEducation.touched)"
+        class="input-validator-span">
+        El campo es requerido
+      </span>
+      <span *ngIf="timeEducation.errors?.minlength" class="input-validator-span">
+        Formato numerico rango de 38
+      </span>
+    </span>
+    <button type="submit" mat-raised-button class="button-add">{{ titleButton }}</button>
+
   </form>
 
   <span></span>
@@ -40,7 +70,7 @@
       <tr *ngFor="let item of educationData;let i=index">
         <td>{{ item.placeEducation }}</td>
         <td>{{ item.levelArchived }}</td>
-        <td>{{ item.timeEducation | addYear }}</td>
+        <td>{{ item.timeEducation | addYear}}</td>
         <td>
           <button type="button" mat-icon-button [matMenuTriggerFor]="afterMenu">
             <mat-icon>more_vert</mat-icon>

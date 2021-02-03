@@ -33,7 +33,7 @@
 
     <!-- dni -->
     <div class="grid-input"
-      [ngClass]="{'form-validator':dni.errors?.required  && ( dni.dirty || dni.touched )|| dni.errors?.minlength}">
+      [ngClass]="{'form-validator':dni.errors?.required  && ( dni.dirty || dni.touched ) || dni.errors?.minlength}">
       <span></span>
       <input type="text" mask="00000000" placeholder="DNI (numerico)" formControlName="dni">
       <span></span>
@@ -122,19 +122,24 @@
 
 
 <div>
-  <app-form-education *ngIf="formPersonalData.valid" (newEducation)="addEducation($event)"
-    (validFormValueEducation)="onChangesEducationForm($event)" [educationData]="educationDataMain">
+  <app-form-education *ngIf="formPersonalData.valid" 
+    (newEducation)="addEducationChange($event)"
+    (validFormValueEducation)="onChangesEducationForm($event)" 
+    [educationData]="educationDataMain"
+    
+    >
   </app-form-education>
 </div>
 
 <div style="margin-top: 100px;">
-  <app-form-languages *ngIf="(educationDataMain.length>0) && formPersonalData.valid"
-    (newLanguages)="addlanguages($event)" (validFormValueLanguages)="onChangesLanguagesForm($event)"
+  <app-form-languages *ngIf="!validationFormEducation && educationDataMain.length>0"
+    (newLanguages)="addlanguagesChange($event)" 
+    (validFormValueLanguages)="onChangesLanguagesForm($event)"
     [languagesData]="languagesDataMain"></app-form-languages>
 </div>
 
 <div class="button-save">
-  <button type="button" mat-button class="button-color-save" (click)="saveData()">
+  <button type="button" mat-button class="button-color-save" (click)="saveData()" [disabled]="(educationDataMain.length<1 || languagesDataMain.length<1)">
     Guardar
   </button>
 </div>
