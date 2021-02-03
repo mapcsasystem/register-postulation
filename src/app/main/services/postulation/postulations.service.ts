@@ -19,7 +19,7 @@ export class PostulationsService {
   constructor(
     private afs: AngularFirestore
   ) {
-    // this.postulationCollection = afs.collection<PostulationModel>('postulations');
+    this.postulationCollection = afs.collection<PostulationModel>('postulations');
     // this.getPostulations();
 
 
