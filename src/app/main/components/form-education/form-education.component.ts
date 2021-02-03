@@ -23,6 +23,7 @@ export class FormEducationComponent implements OnInit {
     timeEducation: ['', [Validators.required, Validators.minLength(2)]]
   });
 
+
   indexValue: number;
 
   addEducation(): void {
