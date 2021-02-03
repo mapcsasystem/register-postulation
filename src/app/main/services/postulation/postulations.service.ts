@@ -36,11 +36,15 @@ export class PostulationsService {
   }
 
   async createPostulation(postulation: PostulationModel): Promise<void> {
-    const dni = postulation.dni;
-    const data = { dni, ...postulation };
-    data.createdAt = new Date().toISOString();
-    const results = await this.postulationCollection.doc(dni).set(data);
-    return results;
+    try {
+      const dni = postulation.dni;
+      const data = { dni, ...postulation };
+      data.createdAt = new Date().toISOString();
+      const results = await this.postulationCollection.doc(dni).set(data);
+
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   // get timestamp() {

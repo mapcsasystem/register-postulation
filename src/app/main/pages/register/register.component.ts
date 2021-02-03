@@ -22,18 +22,18 @@ export class RegisterComponent {
   downloadURL$: Observable<string>;
 
   formPersonalData: FormGroup = this.fb.group({
-    name: ['mmmm', Validators.required],
-    lastName: ['mmmm', Validators.required],
-    dni: ['11111111', [Validators.required, Validators.minLength(8)]],
-    address: ['sdfds. perro', Validators.required],
-    email: ['mapcsasystem@gmail.com', [Validators.required, Validators.pattern(RegExpValidation.email)]],
-    phone: ['111111111111', [Validators.required, Validators.minLength(12)]],
-    description: ['fdgdfgdfgfd', Validators.required],
-    img: ['324234', [Validators.required]],
-    pais: [''],
-    educations: this.fb.array([]),
-    languages: this.fb.array([]),
-    createdAt: ['']
+    name: ['', Validators.required],
+    lastName: ['', Validators.required],
+    dni: ['', [Validators.required, Validators.minLength(8)]],
+    address: ['', Validators.required],
+    email: ['', [Validators.required, Validators.pattern(RegExpValidation.email)]],
+    phone: ['', [Validators.required, Validators.minLength(12)]],
+    description: ['', Validators.required],
+    img: ['', [Validators.required]],
+    educations: '',
+    languages: '',
+    createdAt: [''],
+    country: [''],
   });
 
 
@@ -62,18 +62,27 @@ export class RegisterComponent {
   }
 
 
-  saveData(): void {
+  async saveData(): Promise<void> {
     this.formPersonalData.markAllAsTouched();
     if (this.formPersonalData.invalid) {
       this.formPersonalData.markAsTouched();
       return;
     }
-
-    const getStringForArray = this._removeValueLastWords(this.formPersonalData.get('address').value);
-    this.formPersonalData.get('country').setValue(getStringForArray);
-    this.formPersonalData.get('education').setValue(this.educationDataMain);
-    this.formPersonalData.get('languages').setValue(this.languagesDataMain);
-
+    try {
+      const getStringForArray: string = this._removeValueLastWords(this.formPersonalData.get('address').value);
+      const myJsonStringEducation = JSON.stringify(this.educationDataMain);
+      const myJsonStringLanguages = JSON.stringify(this.languagesDataMain);
+      this.formPersonalData.controls.country.setValue(getStringForArray);
+      this.formPersonalData.controls.educations.setValue(myJsonStringEducation);
+      this.formPersonalData.controls.languages.setValue(myJsonStringLanguages);
+      await this.postulationsService.createPostulation(this.formPersonalData.value);
+      this.formPersonalData.reset();
+      this.educationDataMain = [];
+      this.languagesDataMain = [];
+      alert('Datos guardados correctamente');
+    } catch (error) {
+      console.log(error);
+    }
 
   }
 
@@ -132,6 +141,7 @@ export class RegisterComponent {
   }
 
   private _removeValueLastWords(value: string): string {
+
     let arr: string[] = value.split(' ');
     arr = arr.filter(e => e !== '');
     return arr[arr.length - 1];

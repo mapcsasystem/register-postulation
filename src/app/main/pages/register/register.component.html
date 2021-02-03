@@ -139,7 +139,7 @@
 </div>
 
 <div class="button-save">
-  <button type="button" mat-button class="button-color-save" (click)="saveData()">
+  <button type="button" mat-button class="button-color-save" (click)="saveData()" [disabled]="(educationDataMain.length<1 || languagesDataMain.length<1)">
     Guardar
   </button>
 </div>

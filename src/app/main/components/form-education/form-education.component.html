@@ -5,49 +5,56 @@
 
 <div class="grid-container-education">
   <form class="grid-container-form-education" [formGroup]="formEducationData" (ngSubmit)="addEducation()">
-    
+
     <!-- placeEducation -->
-    
-    <div class="grid-input" [ngClass]="{'form-validator':placeEducation.errors?.required  && ( placeEducation.dirty || placeEducation.touched)}">
+
+    <div class="grid-input"
+      [ngClass]="{'form-validator':placeEducation.errors?.required  && ( placeEducation.dirty || placeEducation.touched)}">
       <span></span>
       <input type="text" placeholder="Lugar de educación" formControlName="placeEducation">
       <span></span>
     </div>
     <span>
-      <span *ngIf="placeEducation.errors?.required  && ( placeEducation.dirty || placeEducation.touched)" class="input-validator-span">
+      <span *ngIf="placeEducation.errors?.required  && ( placeEducation.dirty || placeEducation.touched)"
+        class="input-validator-span">
         El campo es requerido
       </span>
     </span>
-    
+
     <!-- levelArchived -->
-    
-    <div class="grid-input" [ngClass]="{'form-validator':levelArchived.errors?.required  && ( levelArchived.dirty || levelArchived.touched)}">
+
+    <div class="grid-input"
+      [ngClass]="{'form-validator':levelArchived.errors?.required  && ( levelArchived.dirty || levelArchived.touched)}">
       <span></span>
       <input type="text" placeholder="Nivel logrado" formControlName="levelArchived">
       <span></span>
     </div>
     <span>
-      <span *ngIf="levelArchived.errors?.required  && ( levelArchived.dirty || levelArchived.touched)" class="input-validator-span">
+      <span *ngIf="levelArchived.errors?.required  && ( levelArchived.dirty || levelArchived.touched)"
+        class="input-validator-span">
         El campo es requerido
       </span>
     </span>
-    
 
     <!-- timeEducation -->
-    <div class="grid-input" [ngClass]="{'form-validator':timeEducation.errors?.required  && ( timeEducation.dirty || timeEducation.touched)|| timeEducation.errors?.minlength}">
+
+    <div class="grid-input"
+      [ngClass]="{'form-validator':timeEducation.errors?.required  && ( timeEducation.dirty || timeEducation.touched) || timeEducation.errors?.minlength}">
       <span></span>
       <input type="text" mask="00" placeholder="Tiempo" formControlName="timeEducation">
       <span></span>
     </div>
     <span>
-      <span *ngIf="timeEducation.errors?.required  && ( timeEducation.dirty || timeEducation.touched)" class="input-validator-span">
+      <span *ngIf="timeEducation.errors?.required  && ( timeEducation.dirty || timeEducation.touched)"
+        class="input-validator-span">
         El campo es requerido
       </span>
       <span *ngIf="timeEducation.errors?.minlength" class="input-validator-span">
         Formato numerico rango de 38
       </span>
     </span>
-      <button type="submit" mat-raised-button class="button-add">{{ titleButton }}</button>
+    <button type="submit" mat-raised-button class="button-add">{{ titleButton }}</button>
+
   </form>
 
   <span></span>

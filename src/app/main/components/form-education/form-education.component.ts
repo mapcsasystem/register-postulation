@@ -7,6 +7,7 @@ import { EducationModel } from 'src/app/shared/models/education.model';
   templateUrl: './form-education.component.html',
   styleUrls: ['./form-education.component.scss']
 })
+
 export class FormEducationComponent implements OnInit {
 
   @Input() educationData: EducationModel[] = [];
@@ -14,7 +15,6 @@ export class FormEducationComponent implements OnInit {
   @Output() newEducation: EventEmitter<EducationModel[]> = new EventEmitter();
   @Output() validFormValueEducation: EventEmitter<boolean> = new EventEmitter();
 
-  // educationData: EducationInterface[] = [];
   titleButton = 'Agregar';
 
   formEducationData: FormGroup = this.fb.group({
@@ -57,14 +57,14 @@ export class FormEducationComponent implements OnInit {
     this.formEducationData.setValue(this.educationData[index]);
   }
 
-  private updateEducation(index: number): void {
-    this.educationData[index] = this.formEducationData.value;
-  }
-
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.onChangesData();
+  }
+
+  private updateEducation(index: number): void {
+    this.educationData[index] = this.formEducationData.value;
   }
 
   private onChangesData(): void {
@@ -72,7 +72,6 @@ export class FormEducationComponent implements OnInit {
       this.validFormValueEducation.emit(this.formEducationData.invalid);
     });
   }
-
 
   get placeEducation(): AbstractControl {
     return this.formEducationData.get('placeEducation');
