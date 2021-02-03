@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 
@@ -13,7 +13,11 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainModule } from './main/main.module';
 import { environment } from 'src/environments/environment';
-// import {AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
+
+import lacaleEs from '@angular/common/locales/es-MX';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(lacaleEs);
 
 @NgModule({
   declarations: [
@@ -32,7 +36,8 @@ import { environment } from 'src/environments/environment';
   ],
   providers: [
     AngularFirestoreModule,
-    { provide: BUCKET, useValue: environment.firebaseConfig.storageBucket }
+    { provide: BUCKET, useValue: environment.firebaseConfig.storageBucket },
+    { provide: LOCALE_ID, useValue: 'es-MX' }
   ],
   bootstrap: [AppComponent]
 })

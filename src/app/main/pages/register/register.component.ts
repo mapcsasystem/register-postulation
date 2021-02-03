@@ -68,22 +68,36 @@ export class RegisterComponent {
       this.formPersonalData.markAsTouched();
       return;
     }
+
     try {
+      const objeto1 = {
+        educations: []
+      };
+      const objeto2 = {
+        languages: []
+      };
+      // tslint:disable-next-line: prefer-for-of
+      for (let i = 0; i < this.educationDataMain.length; i++) {
+        objeto1.educations.push(this.educationDataMain[i]);
+      }
+      // tslint:disable-next-line: prefer-for-of
+      for (let i = 0; i < this.languagesDataMain.length; i++) {
+        objeto2.languages.push(this.languagesDataMain[i]);
+      }
       const getStringForArray: string = this._removeValueLastWords(this.formPersonalData.get('address').value);
-      const myJsonStringEducation = JSON.stringify(this.educationDataMain);
-      const myJsonStringLanguages = JSON.stringify(this.languagesDataMain);
       this.formPersonalData.controls.country.setValue(getStringForArray);
-      this.formPersonalData.controls.educations.setValue(myJsonStringEducation);
-      this.formPersonalData.controls.languages.setValue(myJsonStringLanguages);
-      await this.postulationsService.createPostulation(this.formPersonalData.value);
       this.formPersonalData.reset();
       this.educationDataMain = [];
       this.languagesDataMain = [];
+      const object3 = this.formPersonalData.value;
+      object3.educations = objeto1.educations;
+      object3.languages = objeto2.languages;
+      await this.postulationsService.createPostulation(object3);
       alert('Datos guardados correctamente');
     } catch (error) {
       console.log(error);
     }
-
+    this.formPersonalData.reset();
   }
 
   uploadFile(event): void {
@@ -111,7 +125,6 @@ export class RegisterComponent {
     private storage: AngularFireStorage,
     private postulationsService: PostulationsService
   ) {
-    // postulationsService.createPostulation(this.formPersonalData.value);
   }
 
 
@@ -147,4 +160,13 @@ export class RegisterComponent {
     return arr[arr.length - 1];
   }
 
+  private setValueArray(value: any, arr: EducationModel[] | LanguagesModel[]): any {
+    const obj = { ...value };
+    const arrAux = [...arr];
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < arrAux.length; i++) {
+      obj.educations.push(arrAux[i]);
+    }
+    return obj;
+  }
 }

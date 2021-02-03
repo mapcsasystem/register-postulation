@@ -13,14 +13,14 @@ import { environment } from 'src/environments/environment';
 export class PostulationsService {
 
 
-  postulations: Observable<PostulationModel[]>;
   private postulationCollection: AngularFirestoreCollection<PostulationModel>;
+  postulations: Observable<PostulationModel[]>;
 
   constructor(
     private afs: AngularFirestore
   ) {
-    this.postulationCollection = afs.collection<PostulationModel>('postulations');
-    this.getPostulations();
+    // this.postulationCollection = afs.collection<PostulationModel>('postulations');
+    // this.getPostulations();
 
 
     // this.db= firebase.firestore();
@@ -29,11 +29,13 @@ export class PostulationsService {
   }
 
 
-  private getPostulations(): void {
-    // this.postulations = this.postulationCollection.snapshotChanges().pipe(
-    //   map(actions => actions.map(a => a.payload.doc.data() as PostulationModel))
-    // );
+  getPostulations(): Observable<PostulationModel[]> {
+    this.postulationCollection = this.afs.collection<PostulationModel>('postulations');
+    this.postulations = this.postulationCollection.valueChanges();
+    return this.postulations;
   }
+
+
 
   async createPostulation(postulation: PostulationModel): Promise<void> {
     try {
