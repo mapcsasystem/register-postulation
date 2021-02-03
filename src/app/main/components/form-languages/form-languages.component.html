@@ -1,0 +1,86 @@
+<div class="title-page">
+  Lenguajes de programación
+</div>
+<hr class="size-line">
+
+<div class="grid-container-education">
+  <form class="grid-container-form-education" [formGroup]="formLanguagesData" (ngSubmit)="addLanguages()">
+
+    <!-- languages -->
+
+    <div class="grid-input"
+      [ngClass]="{'form-validator':languages.errors?.required  && ( languages.dirty || languages.touched)}">
+      <span></span>
+      <input type="text" placeholder="Lenguaje" formControlName="languages">
+      <span></span>
+    </div>
+    <span>
+      <span *ngIf="languages.errors?.required  && ( languages.dirty || languages.touched)" class="input-validator-span">
+        El campo es requerido
+      </span>
+    </span>
+
+    <!-- levelArchived -->
+
+
+    <div class="grid-input"
+      [ngClass]="{'form-validator':levelArchived.errors?.required  && ( levelArchived.dirty || levelArchived.touched)}">
+      <span></span>
+      <input type="text" placeholder="Nivel logrado" formControlName="levelArchived">
+      <span></span>
+    </div>
+    <span>
+      <span *ngIf="levelArchived.errors?.required  && ( levelArchived.dirty || levelArchived.touched)"
+        class="input-validator-span">
+        El campo es requerido
+      </span>
+    </span>
+
+    <!-- timeEducation -->
+
+    <div class="grid-input"
+    [ngClass]="{'form-validator':timeExperiences.errors?.required  && ( timeExperiences.dirty || timeExperiences.touched) || timeExperiences.errors?.minlength}">
+      <span></span>
+      <input type="text" mask="00" placeholder="Tiempo de experiencia con el lenguaje" formControlName="timeExperiences">
+      <span></span>
+    </div>
+    <span>
+      <span *ngIf="timeExperiences.errors?.required  && ( timeExperiences.dirty || timeExperiences.touched)"
+        class="input-validator-span">
+        El campo es requerido
+      </span>
+      <span *ngIf="timeExperiences.errors?.minlength" class="input-validator-span">
+        Formato numerico rango de 38
+      </span>
+    </span>
+    <button type="submit" mat-raised-button class="button-add">{{ titleButton }}</button>
+  </form>
+
+  <span></span>
+
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Lenguaje</th>
+        <th>Nivel</th>
+        <th>Tiempo</th>
+        <th>Acciones</th>
+      </tr>
+      <tr *ngFor="let item of languagesData;let i=index">
+        <td>{{ item.languages }}</td>
+        <td>{{ item.levelArchived }}</td>
+        <td>{{ item.timeExperiences | addYear }}</td>
+        <td>
+          <button type="button" mat-icon-button [matMenuTriggerFor]="afterMenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #afterMenu="matMenu" xPosition="after" class="customize">
+            <button mat-menu-item (click)="setValuesControl(i)">Editar</button>
+            <button mat-menu-item (click)="deleteLanguages(i)">Borrar</button>
+          </mat-menu>
+        </td>
+      </tr>
+
+    </table>
+  </div>
+</div>

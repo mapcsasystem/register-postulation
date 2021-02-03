@@ -1,1 +1,105 @@
 /* You can add global styles to this file, and also import other style files */
+$base-font: "Poppins";
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.title-page {
+    width: 90%;
+    font-family: $base-font;
+    color: #333333;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 36px;
+    margin-left: 41px;
+    margin-right: 0px;
+    margin-top: 27px;
+    margin-bottom: 5px;
+}
+
+.education {
+    padding-top: 1px;
+    margin-top: 128px;
+}
+
+.size-line {
+    width: 1260px;
+    text-align: left;
+    margin-left: 41px;
+    margin-bottom: 34px;
+    color: #000000;
+}
+
+::placeholder {
+    color: #4f4f4f;
+    font-size: 1.2rem;
+}
+
+.grid-input {
+    display: grid;
+    grid-template-columns: 15px 362px 15px;
+    border: 1px solid #828282;
+    border-radius: 10px;
+}
+
+input {
+    border-width: 0px 0px;
+    outline: none;
+}
+
+.mat-icon-button {
+    margin-left: 10px;
+    margin-top: -100px;
+    min-width: 0;
+    width: 0px;
+    height: 0px;
+    flex-shrink: 0;
+    line-height: 40px;
+    border-radius: 0;
+    margin-top: -8px;
+}
+
+.form-validator {
+    border: 1px solid red;
+    border-radius: 10px;
+}
+
+.input-validator-span {
+    display: flex;
+    font-size: 9px;
+    align-items: flex-end;
+    margin-left: 10px;
+    margin-top: -4px;
+    color: red;
+}
+
+.validator-txtarea {
+    border: 1px solid red !important ;
+    box-shadow: 0px 0px 5px red  !important;
+    box-sizing: border-box !important;
+    border-radius: 10px !important;
+}
+
+.validator-img{
+    border: 1px solid red !important ;
+    box-sizing: border-box !important ;
+    box-shadow: 0px 0px 5px red !important ;
+    border-radius: 20px !important ;
+}

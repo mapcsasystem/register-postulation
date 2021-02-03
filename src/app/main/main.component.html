@@ -1,0 +1,34 @@
+<mat-sidenav-container fullscreen>
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === !false"
+    class="size-sidenav color-sidenav-container">
+    <mat-toolbar>
+      <span class="text-menu-title">Menú</span>
+    </mat-toolbar>
+    <button *ngIf="!(currentUser$ | async)" mat-raised-button class="color-button" (click)="login()">
+      Iniciar con google
+    </button>
+    <button *ngIf="(currentUser$ | async)" mat-raised-button class="color-button" (click)="logout()">
+      Cerrar Sesión
+    </button>
+    <mat-divider class="material-divider"></mat-divider>
+    <mat-nav-list *ngIf="(currentUser$ | async)">
+      <a routerLink="registro" mat-list-item (click)="drawer.toggle()">
+        <mat-icon mat-list-icon class="color-size-icon">assignment</mat-icon>
+        <span class="title-list">Registro</span>
+      </a>
+      <a routerLink="postulantes" mat-list-item (click)="drawer.toggle()">
+        <mat-icon mat-list-icon class="color-size-icon">fact_check</mat-icon>
+        <span class="title-list">Postulantes</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="color-toolbar" style="width: 1350px;">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon class="color-icon-toolbar">menu</mat-icon>
+      </button>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
