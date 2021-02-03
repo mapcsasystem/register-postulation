@@ -86,18 +86,20 @@ export class RegisterComponent {
       }
       const getStringForArray: string = this._removeValueLastWords(this.formPersonalData.get('address').value);
       this.formPersonalData.controls.country.setValue(getStringForArray);
-      this.formPersonalData.reset();
       this.educationDataMain = [];
       this.languagesDataMain = [];
       const object3 = this.formPersonalData.value;
       object3.educations = objeto1.educations;
       object3.languages = objeto2.languages;
       await this.postulationsService.createPostulation(object3);
-      alert('Datos guardados correctamente');
     } catch (error) {
       console.log(error);
+
     }
     this.formPersonalData.reset();
+
+    this.downloadURL$ = null;
+
   }
 
   uploadFile(event): void {

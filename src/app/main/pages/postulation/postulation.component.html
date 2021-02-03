@@ -1,9 +1,9 @@
 <div class="grid-container">
 
-  <mat-form-field appearance="NULL">
+  <mat-form-field appearance="outline">
     <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-      <input matStartDate formControlName="start" placeholder="Start date">
-      <input matEndDate formControlName="end" placeholder="End date">
+      <input matStartDate formControlName="start" placeholder="Fecha de Inicio">
+      <input matEndDate formControlName="end" placeholder="Fecha final">
     </mat-date-range-input>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker #picker></mat-date-range-picker>
@@ -38,13 +38,13 @@
             <img [src]="item.img" onError="this.src='../../../../assets/img/svg/google_icon.svg'" />
             <span></span>
             <mat-chip-list aria-label="Fish selection">
-              <mat-chip color="accent" selected>DNI : {{ item.dni }}</mat-chip>
-              <mat-chip color="warn" selected>Nombre : {{ item.name}}</mat-chip>
-              <mat-chip color="primary" selected>Apellido : {{item.lastName}}</mat-chip>
-              <mat-chip color="accent" selected>Dirección : {{item.address}}</mat-chip>
-              <mat-chip color="warn" selected>Correo : {{item.email}}</mat-chip>
+              <mat-chip color="link" selected>DNI : {{ item.dni }}</mat-chip>
+              <mat-chip color="link" selected>Nombre : {{ item.name}}</mat-chip>
+              <mat-chip color="link" selected>Apellido : {{item.lastName}}</mat-chip>
+              <mat-chip color="link" selected>Dirección : {{item.address}}</mat-chip>
+              <mat-chip color="link" selected>Correo : {{item.email}}</mat-chip>
               <mat-chip color="link" selected>Teléfono : {{item.phone | phoneFormat}}</mat-chip>
-              <mat-chip color="primary" selected>Descripción : {{item.description}}</mat-chip>
+              <mat-chip color="link" selected>Descripción : {{item.description}}</mat-chip>
             </mat-chip-list>
           </mat-card>
         </mat-card-content>
