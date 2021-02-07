@@ -1,6 +1,6 @@
 <mat-sidenav-container fullscreen>
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === !false"
+    [mode]="(isHandset$ | async) ? 'side' : 'side'" [opened]="(isHandset$ | async) === !false"
     class="size-sidenav color-sidenav-container">
     <mat-toolbar>
       <span class="text-menu-title">Menú</span>

@@ -1,33 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+// import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MatDateRangePicker } from '@angular/material/datepicker';
+import { PostulationModel } from 'src/app/shared/models/postulations.models';
+import { Observable } from 'rxjs';
+import { PostulationsService } from '../../services/postulation/postulations.service';
+import { MatAccordion } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-postulation',
   templateUrl: './postulation.component.html',
   styleUrls: ['./postulation.component.scss']
 })
-export class PostulationComponent {
-  /** Based on the screen size, switch from standard to one column per row */
-  cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(({ matches }) => {
-      if (matches) {
-        return [
-          { title: 'Card 1', cols: 1, rows: 1 },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          { title: 'Card 3', cols: 1, rows: 1 },
-          { title: 'Card 4', cols: 1, rows: 1 }
-        ];
-      }
+export class PostulationComponent implements OnInit {
 
-      return [
-        { title: 'Card 1', cols: 2, rows: 1 },
-        { title: 'Card 2', cols: 1, rows: 1 },
-        { title: 'Card 3', cols: 1, rows: 2 },
-        { title: 'Card 4', cols: 1, rows: 1 }
-      ];
-    })
-  );
+  // @ViewChild('picker') picker;
+  @ViewChild(MatAccordion) accordion: MatAccordion;
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  displayedColumns: string[] = ['Lugar de educación', 'Nivel logrado', 'Tiempo'];
+
+
+  items$: Observable<PostulationModel[]>;
+
+
+  constructor(public postulationService: PostulationsService) { }
+
+  ngOnInit(): void {
+    this.items$ = this.postulationService.getPostulations();
+  }
+
 }

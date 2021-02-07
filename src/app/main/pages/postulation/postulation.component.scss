@@ -1,21 +1,129 @@
+$base-font: "Poppins", sans-serif;
 .grid-container {
-  margin: 20px;
+  margin: 17px;
+  margin-left: 70px;
+  margin-right: 80px;
 }
 
-.dashboard-card {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
+.color-expantion {
+  background: #f2f2f2;
+  border: 1px solid #bdbdbd;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px 10px 0px 0px;
+  margin-bottom: 10px;
 }
 
-.more-button {
-  position: absolute;
-  top: 5px;
-  right: 10px;
+.color-text-expantion {
+  width: 100px;
+  height: 14px;
+  left: 98px;
+  top: 158px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+
+  color: #000000;
 }
 
-.dashboard-card-content {
-  text-align: center;
+.title-data-personal {
+  width: 162px;
+  height: 24px;
+  left: 116px;
+  top: 238px;
+
+  font-family: $base-font;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 27px;
+  display: flex;
+  align-items: center;
+
+  color: #000000;
+}
+
+::ng-deep .mat-expansion-panel-body {
+  background-color: white;
+}
+
+::ng-deep .mat-expansion-panel-header {
+  background: #f2f2f2;
+  border: 1px solid #bdbdbd;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px 10px 0px 0px;
+}
+
+.top-content {
+  margin-top: 43px;
+}
+
+.header-content {
+  width: 162px;
+  height: 24px;
+  margin-top: 43px;
+  font-family: $base-font;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 27px;
+  display: flex;
+  align-items: center;
+  color: #000000;
+}
+
+.move-left-titles{
+  display: flex;
+}
+
+mat-card{
+  margin-top: 10px;
+}
+
+mat-card-content>mat-card{
+  background: #C4C4C4;
+  border: 1px solid #bdbdbd;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.45);
+  border-radius: 10px 10px 10px 10px;
+  display: grid;
+  grid-template-columns: 20% 2% 78%;
+  grid-template-rows: 200px;
+  box-sizing: border-box;
+}
+
+.span-grid{
+  display: grid;
+  grid-template-columns: 155px 156px 156px;
+}
+
+img{
+  width: 100%;
+  height: 100%;
+}
+
+.flex-span{
+  display: flex;
+  flex-direction: row;
+}
+
+.font-size-item-list{
+  font-size: 12px;
+}
+table {
+  width: 100%;
+  background: #C4C4C4;
+  border: 1px solid #bdbdbd;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.45);
+  border-radius: 10px 10px 10px 10px;
+  
 }
