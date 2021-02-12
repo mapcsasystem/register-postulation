@@ -1,5 +1,5 @@
-import { EducationModel } from "./education.model";
-import { LanguagesModel } from "./languages.model";
+import { EducationModel } from './education.model';
+import { LanguagesModel } from './languages.model';
 
 export interface PostulationModel {
     address: string;
